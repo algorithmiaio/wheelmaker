@@ -9,6 +9,7 @@ You must compile your C++ project in an environment that's identical to what it 
 __Before continuing in this guide, you should already have terminal access to a running docker container using the provided image.__
 
 The first step is to compile your C++ project, best practice here is to build only what you need.
+
 Need a little help on figuring out how to compile your C++ project so that our wheel_builder will work properly? Take a look at our [caffe_builder][caffe_builder] script and see how we migrate and move necessary files while preserving the overall folder architecture.
 If you're creating a simple python wrapper, exporting your `*.so` / `*.dll` / `*.pyd` files should be sufficient. An example of a project like this would be the [cv2 / opencv-python][cv2] package. It contains a simple ```__init__.py``` and a single ```cv2.so``` file, super simple!
 
@@ -21,9 +22,9 @@ Your project's build products should now been placed into a properly named syste
 
 Now we're ready to finally create a wheel with the [wheel_maker][whl_mkr] script. Make sure to rename the placeholder values at the top of the script, ensuring that your package name is identical to the folder with your build products.
 
-Now we're ready to finally build our wheel, wheel construction is a simple zippping process - but pip requires that file to be of a very particular format.
+Wheel construction is a simple zippping process - but pip requires that file to be of a very particular format.
 
-simply move to the main directory and type this: `/opt/anaconda2/bin/python wheel_maker.py bdist_wheel`.
+To start the process, type this: `/opt/anaconda2/bin/python wheel_maker.py bdist_wheel`.
 
 `The version of anaconda python you use is important. While building if you need any interfacing with python at all, be sure to use the implementation in the relevent anaconda bin directory.`
 
@@ -33,13 +34,16 @@ If you followed these steps and everything has worked out smoothly so far, your 
 
 ## Saving the wheel
 
-Now we've created a wheel, we've confirmed that it works - but it doesn't do us much good sitting inside of a docker container on our local machine. We need a way to store this for the long term - S3 is a great long term storage tool. [Create an S3 bucket][aws_bucket] (algorithmia needs read access, so either restrict to VPC or make it publicly accessable for now), and either [create or obtain your aws CLI credenials][aws_creds].
+Now we've created a wheel, we've confirmed that it works - but it doesn't do us much good sitting inside of a docker container on our local machine.
+
+We need a way to store this for the long term - S3 is a great long term storage tool. [Create an S3 bucket][aws_bucket] (algorithmia needs read access, so either restrict to VPC or make it publicly accessable for now), and either [create or obtain your aws CLI credenials][aws_creds].
 
 Once that's done we're ready to upload our finished wheel, simply edit the placeholders in the [upload utility][upload] and execute it like so: `python upload_to_s3.py my_project_-0.1.0_cp2.whl my-wheels`.
 
 
 ## Using the wheel on algorithmia
-Now that we have a wheel, it should work on the algorithmia platform. To test this, simply create a new python algorithm (ensuring that the version you used in creating your wheel is the same as your new algorithm), and add the S3 URL to the dependencies file. After compiling you should be able to interact with your compiled C++ project freely.
+Now that we have a wheel, it should work on the algorithmia platform. To test this, simply create a new python algorithm (ensuring that the version you used in creating your wheel is the same as your new algorithm), and add the S3 URL to the dependencies file.
+After compiling you should be able to interact with your compiled C++ project freely within python.
 
 
 
