@@ -2,6 +2,7 @@
 
 This project defines best practices and techniques on how to create a python wheel that contains C++ shared objects, along with any potental python components so that they work properly on the Algorithmia platform. For requirements, please refer to the discourse and ongoing conversation as they are subject to change.
 
+__This repository is a helpful guide for enterprise customers, if you want to know more. Email us!__
 
 ## Compliation quirks
 
