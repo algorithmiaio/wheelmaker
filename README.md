@@ -16,6 +16,8 @@ If you're creating a simple python wrapper, exporting your `*.so` / `*.dll` / `*
 
 Your project's build products should now been placed into a properly named system directory, with all of the necessary relative path heirarchies preserved. If you want to test out your package now, simply open up a python REPL (aka type in `python` into your terminal window) and simply import your package by name.
 
+Make sure that your project's `__init__.py` imports the right components from your shared objects, otherwise importing your package will not allow you to access your compiled library. [look at this opencv example][cv2_init] for guidance.
+
 `If there are any issues with the python repl, then something might have went wrong during the compilation / data migration stage. Don't hesistate to get in touch with us if you're having issues.`
 
 ## Wheel creation
@@ -53,3 +55,4 @@ After compiling you should be able to interact with your compiled C++ project fr
 [upload]: https://github.com/algorithmiaio/wheel_maker/blob/master/upload_to_s3.py
 [caffe_builder]: https://github.com/algorithmiaio/wheel_maker/blob/master/caffe_builder.py
 [cv2]: https://github.com/skvark/opencv-python
+[cv2_init]: https://github.com/skvark/opencv-python/blob/master/cv2/__init__.py#L4-L5
