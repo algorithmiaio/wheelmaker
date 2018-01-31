@@ -21,15 +21,18 @@ BUILD_DIR = join(SOURCE_DIR, 'build')
 PROTO_DIR = join(SOURCE_DIR, 'src/caffe/proto')
 SRC_DIR = join(SOURCE_DIR, 'src')
 LIB_DIR = join(SOURCE_DIR,'build/lib')
+
+## These are caffe specific directories, replace with your own as necessary.
 PY_DIR = join(SOURCE_DIR, 'python/caffe')
 MOD_DIR = join(PY_DIR, 'proto')
 SRC_GEN = [join(SRC_DIR, 'caffe/proto/caffe.pb.h'),
            join(SRC_DIR, 'caffe/proto/caffe.pb.cc')]
 
 
-"""
-Only necessary for systems that don't automatically have everything necessary for compilation, can be ignored in our case.
-# Test libraries
+
+## Only necessary for systems that don't automatically have everything necessary for compilation,
+# can be ignored in our case.
+
 LIBDIRS = ['/usr/lib', '/usr/lib/x86_64-linux-gnu/']
 LIBRARIES = ['cblas', 'blas', 'boost_thread', 'glog', 'gflags', 'protobuf',
              'boost_python', 'boost_system', 'boost_filesystem', 'm', 'hdf5_hl',
@@ -49,11 +52,8 @@ for lib in LIBRARIES:
         print("sudo apt-get install --no-install-recommends libboost-all-dev")
         sys.exit(-1)
 
-"""
 
-"""
-Only necessary for caffe projects, or projects with protocol buffers, can be ignored.
-
+## Only necessary for caffe projects, or projects with protocol buffers, can be ignored.
 
 # Create the proto module in python/caffe, from the caffe proto buffer
 
@@ -78,8 +78,6 @@ if (not exists(join(PROTO_DIR, 'caffe.pb.cc')) or
                      join(PROTO_DIR, 'caffe.proto'),
                      '--proto_path', PROTO_DIR,
                      '--cpp_out', PROTO_DIR])
-
-"""
 
 ## if there are any other build or make operations that need to be performed for your modification, please move
 ## the required build products into the DUMP_DIR after being created.
