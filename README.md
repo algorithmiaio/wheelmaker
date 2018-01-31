@@ -11,7 +11,7 @@ __Before continuing in this guide, you should already have terminal access to a 
 The first step is to compile your C++ project, best practice here is to build only what you need.
 
 Need a little help on figuring out how to compile your C++ project so that our wheel_builder will work properly? Take a look at our [caffe_builder][caffe_builder] script and see how we migrate and move necessary files while preserving the overall folder architecture.
-If you're creating a simple python wrapper, exporting your `*.so` / `*.dll` / `*.pyd` files should be sufficient. An example of a project like this would be the [cv2 / opencv-python][cv2] package. It contains a simple ```__init__.py``` and a single ```cv2.so``` file, super simple!
+If you're creating a simple python wrapper, exporting your `*.so` / `*.dll` / `*.pyd` files should be sufficient. An example of a project like this would be the [cv2 / opencv-python][cv2] package. It contains a ```__init__.py``` and a the ```cv2.so``` file.
 
 
 Your project's build products should now been placed into a properly named system directory, with all of the necessary relative path heirarchies preserved. If you want to test out your package now, simply open up a python REPL (aka type in `python` into your terminal window) and simply import your package by name.
