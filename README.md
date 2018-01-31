@@ -5,12 +5,15 @@ This project defines best practices and techniques on how to create a python whe
 
 ## Compliation quirks
 
-Here is a link to our built docker image. To create a useful wheel, you must compile your C++ project in an environment that's identical to what it will be executing on as an algorithm, as most C++ projects compile using relative system paths (static builds not withstanding) - this means you should compile your C++ project within a docker container using the above image.
+You must compile your C++ project in an environment that's identical to what it will be executing on as an algorithm, as most C++ projects compile using relative system paths (static builds not withstanding).
+__Before continuing in this guide, you should already have terminal access to a running docker container using the provided image.__
 
-Need a little help on figuring out how to compile your C++ project so that our wheel_builder will work properly? Take a look at our caffe_builder.py script and see how we migrate and move necessary files while preserving the overall folder architecture. If you're creating a simple python wrapper, exporting your `*.so` / `*.dll` / `*.pyd` files should be sufficient. An example of a project like this would be the cv2 / opencv-python package. It contains a simple ```__init__.py``` and a single ```cv2.so``` file, super simple!
+The first step is to compile your C++ project, best practice here is to build only what you need.
+Need a little help on figuring out how to compile your C++ project so that our wheel_builder will work properly? Take a look at our [caffe_builder][caffe_builder] script and see how we migrate and move necessary files while preserving the overall folder architecture.
+If you're creating a simple python wrapper, exporting your `*.so` / `*.dll` / `*.pyd` files should be sufficient. An example of a project like this would be the [cv2 / opencv-python][cv2] package. It contains a simple ```__init__.py``` and a single ```cv2.so``` file, super simple!
 
 
-Your project's build products have now been placed into a properly named system directory, with all of the necessary relative path heirarchies preserved! If you want to test out your package now, simply open up a python REPL (aka type in `python` into your terminal window) and simply import your package by name.
+Your project's build products should now been placed into a properly named system directory, with all of the necessary relative path heirarchies preserved. If you want to test out your package now, simply open up a python REPL (aka type in `python` into your terminal window) and simply import your package by name.
 
 `If there are any issues with the python repl, then something might have went wrong during the compilation / data migration stage. Don't hesistate to get in touch with us if you're having issues.`
 
@@ -44,3 +47,5 @@ Now that we have a wheel, it should work on the algorithmia platform. To test th
 [whl_mkr]: https://github.com/algorithmiaio/wheel_maker/blob/master/wheel_maker.py
 [aws_creds]: https://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html
 [upload]: https://github.com/algorithmiaio/wheel_maker/blob/master/upload_to_s3.py
+[caffe_builder]: https://github.com/algorithmiaio/wheel_maker/blob/master/caffe_builder.py
+[cv2]: https://github.com/skvark/opencv-python
